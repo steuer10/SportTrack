@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SportTrack – Protótipo</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #C8F53D;
+    --dark: #0D0D0D;
+    --card: #161616;
+    --card2: #1E1E1E;
+    --muted: #555;
+    --text: #F0F0F0;
+    --sub: #999;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    color: var(--green);
+  }
+
+  .nav-tabs {
+    display: flex;
+    gap: 6px;
+  }
+
+  .nav-tab {
+    padding: 8px 18px;
+    border-radius: 100px;
+    border: none;
+    background: transparent;
+    color: var(--sub);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active {
+    background: var(--green);
+    color: var(--dark);
+    font-weight: 600;
+  }
+
+  /* PAGES */
+  .page { display: none; padding: 40px 32px; max-width: 1100px; margin: 0 auto; animation: fadeIn 0.3s ease; }
+  .page.active { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── HOME ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    min-height: 60vh;
+  }
+
+  .hero-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    line-height: 0.95;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 span { color: var(--green); }
+
+  .hero p {
+    color: var(--sub);
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-primary { background: var(--green); color: var(--dark); }
+  .btn-primary:hover { transform: scale(1.04); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid #333; margin-left: 12px; }
+  .btn-outline:hover { border-color: var(--green); color: var(--green); }
+
+  .hero-visual {
+    background: var(--card);
+    border-radius: 20px;
+    border: 1px solid #222;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-visual::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: var(--green);
+    border-radius: 50%;
+    opacity: 0.06;
+  }
+
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+
+  .stat-card {
+    background: var(--card2);
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid #2a2a2a;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: var(--green);
+    line-height: 1;
+  }
+
+  .stat-label { color: var(--sub); font-size: 13px; margin-top: 4px; }
+
+  .mini-bar-wrap { margin-top: 16px; }
+  .mini-bar-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--sub); margin-bottom: 6px; }
+  .mini-bar { height: 6px; background: #2a2a2a; border-radius: 100px; overflow: hidden; }
+  .mini-bar-fill { height: 100%; background: var(--green); border-radius: 100px; }
+
+  /* ── TREINOS ── */
+  .page-header { margin-bottom: 32px; }
+  .page-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 2px; }
+  .page-header p { color: var(--sub); margin-top: 4px; }
+
+  .form-card {
+    background: var(--card);
+    border: 1px solid #222;
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 32px;
+  }
+
+  .form-title { font-weight: 600; font-size: 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .form-title span { background: var(--green); color: var(--dark); border-radius: 6px; padding: 2px 8px; font-size: 12px; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-full { grid-column: 1/-1; }
+
+  .field label { display: block; font-size: 12px; font-weight: 600; color: var(--sub); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+
+  .field input, .field select, .field textarea {
+    width: 100%;
+    background: var(--card2);
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--green); }
+  .field textarea { resize: vertical; min-height: 80px; }
+  .field select option { background: var(--card); }
+
+  .form-actions { display: flex; justify-content: flex-end; margin-top: 20px; }
+
+  /* Treino list */
+  .treinos-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .treino-item {
+    background: var(--card);
+    border: 1px solid #222;
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: border-color 0.2s;
+  }
+
+  .treino-item:hover { border-color: #333; }
+
+  .treino-icon {
+    width: 48px; height: 48px;
+    background: var(--card2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .treino-info { flex: 1; }
+  .treino-nome { font-weight: 600; font-size: 15px; }
+  .treino-meta { color: var(--sub); font-size: 13px; margin-top: 3px; }
+
+  .treino-badge {
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .badge-green { background: rgba(200,245,61,0.15); color: var(--green); }
+  .badge-blue { background: rgba(100,160,255,0.15); color: #64A0FF; }
+  .badge-orange { background: rgba(255,160,50,0.15); color: #FFA032; }
+  .badge-purple { background: rgba(180,120,255,0.15); color: #B478FF; }
+
+  .treino-dur {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--green);
+    letter-spacing: 1px;
+    text-align: right;
+  }
+
+  .treino-dur small { display: block; font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--sub); font-weight: 400; letter-spacing: 0; }
+
+  /* ── DASHBOARD ── */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+
+  .kpi-card {
+    background: var(--card);
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .kpi-icon { font-size: 24px; margin-bottom: 12px; }
+  .kpi-val { font-family: 'Bebas Neue', sans-serif; font-size: 44px; color: var(--green); line-height: 1; }
+  .kpi-name { color: var(--sub); font-size: 13px; margin-top: 6px; }
+
+  .charts-row { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+
+  .chart-card {
+    background: var(--card);
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .chart-title { font-weight: 600; font-size: 15px; margin-bottom: 20px; color: var(--text); }
+
+  /* Bar chart */
+  .bar-chart { display: flex; align-items: flex-end; gap: 10px; height: 140px; }
+
+  .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+
+  .bar {
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+    background: #222;
+    position: relative;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+
+  .bar:hover { background: var(--green) !important; }
+  .bar.highlight { background: var(--green); }
+
+  .bar-day { font-size: 11px; color: var(--sub); }
+
+  /* Donut */
+  .donut-wrap { display: flex; flex-direction: column; align-items: center; }
+
+  svg.donut { transform: rotate(-90deg); }
+
+  .donut-legend { width: 100%; margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .legend-pct { margin-left: auto; font-weight: 600; color: var(--text); }
+
+  /* Metas */
+  .metas-card {
+    background: var(--card);
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 20px;
+  }
+
+  .meta-item { margin-bottom: 16px; }
+  .meta-header { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
+  .meta-name { font-weight: 500; }
+  .meta-pct { color: var(--green); font-weight: 600; }
+  .meta-bar { height: 8px; background: #222; border-radius: 100px; overflow: hidden; }
+  .meta-fill { height: 100%; background: var(--green); border-radius: 100px; transition: width 1s ease; }
+
+  /* ── PERFIL ── */
+  .perfil-top { display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: center; margin-bottom: 40px; }
+
+  .avatar {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), #6BFF6B);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: var(--dark);
+    border: 3px solid var(--green);
+  }
+
+  .perfil-nome { font-family: 'Bebas Neue', sans-serif; font-size: 40px; letter-spacing: 2px; }
+  .perfil-sub { color: var(--sub); font-size: 14px; margin-top: 4px; }
+  .perfil-badges { display: flex; gap: 8px; margin-top: 12px; }
+  .perfil-badge { background: var(--card2); border: 1px solid #2a2a2a; border-radius: 100px; padding: 4px 14px; font-size: 12px; }
+
+  .perfil-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+
+  .pstat {
+    background: var(--card);
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .pstat-val { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--green); }
+  .pstat-label { color: var(--sub); font-size: 13px; margin-top: 4px; }
+
+  /* toast */
+  .toast {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    background: var(--green);
+    color: var(--dark);
+    font-weight: 600;
+    padding: 14px 24px;
+    border-radius: 100px;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s;
+    z-index: 999;
+    pointer-events: none;
+  }
+
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 52px; }
+    .hero-visual { display: none; }
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .charts-row { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">SportTrack</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="goTo('home')">Início</button>
+    <button class="nav-tab" onclick="goTo('treinos')">Treinos</button>
+    <button class="nav-tab" onclick="goTo('dashboard')">Dashboard</button>
+    <button class="nav-tab" onclick="goTo('perfil')">Perfil</button>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div>
+      <div class="hero-label">⚡ Sua evolução, rastreada</div>
+      <h1>TREINO<br>INTELI<span>GENTE</span></h1>
+      <p>Registre seus treinos, acompanhe sua evolução e bata suas metas com o SportTrack — a plataforma do atleta moderno.</p>
+      <button class="btn btn-primary" onclick="goTo('treinos')">Registrar Treino</button>
+      <button class="btn btn-outline" onclick="goTo('dashboard')">Ver Dashboard</button>
+    </div>
+    <div class="hero-visual">
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-num">24</div>
+          <div class="stat-label">Treinos este mês</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">18h</div>
+          <div class="stat-label">Horas treinadas</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div style="font-size:13px;color:var(--sub);margin-bottom:12px;font-weight:600;">Meta semanal</div>
+        <div class="mini-bar-wrap">
+          <div class="mini-bar-label"><span>Musculação</span><span>4/5 dias</span></div>
+          <div class="mini-bar"><div class="mini-bar-fill" style="width:80%"></div></div>
+        </div>
+        <div class="mini-bar-wrap" style="margin-top:10px">
+          <div class="mini-bar-label"><span>Corrida</span><span>2/3 dias</span></div>
+          <div class="mini-bar"><div class="mini-bar-fill" style="width:67%"></div></div>
+        </div>
+        <div class="mini-bar-wrap" style="margin-top:10px">
+          <div class="mini-bar-label"><span>Natação</span><span>1/2 dias</span></div>
+          <div class="mini-bar"><div class="mini-bar-fill" style="width:50%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TREINOS -->
+<div class="page" id="page-treinos">
+  <div class="page-header">
+    <h2>MEUS TREINOS</h2>
+    <p>Registre e acompanhe cada sessão</p>
+  </div>
+
+  <div class="form-card">
+    <div class="form-title">Novo Treino <span>+ ADD</span></div>
+    <div class="form-grid">
+      <div class="field">
+        <label>Tipo de Esporte</label>
+        <select id="tipo">
+          <option>🏋️ Musculação</option>
+          <option>🏃 Corrida</option>
+          <option>🏊 Natação</option>
+          <option>🚴 Ciclismo</option>
+          <option>⚽ Futebol</option>
+          <option>🥊 Boxe</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Duração (min)</label>
+        <input type="number" id="duracao" placeholder="Ex: 60" min="1">
+      </div>
+      <div class="field">
+        <label>Data</label>
+        <input type="date" id="data">
+      </div>
+      <div class="field">
+        <label>Intensidade</label>
+        <select id="intensidade">
+          <option>🟢 Leve</option>
+          <option selected>🟡 Moderada</option>
+          <option>🔴 Intensa</option>
+        </select>
+      </div>
+      <div class="field form-full">
+        <label>Observações</label>
+        <textarea id="obs" placeholder="Como foi o treino? Algum PR? Dificuldades?"></textarea>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" onclick="addTreino()">✓ Salvar Treino</button>
+    </div>
+  </div>
+
+  <div class="treinos-list" id="treinos-list">
+    <div class="treino-item">
+      <div class="treino-icon">🏋️</div>
+      <div class="treino-info">
+        <div class="treino-nome">Musculação – Peito e Tríceps</div>
+        <div class="treino-meta">Hoje · 🔴 Intensa · Bati PR no supino!</div>
+      </div>
+      <div class="treino-badge badge-green">Musculação</div>
+      <div class="treino-dur">75<small>min</small></div>
+    </div>
+    <div class="treino-item">
+      <div class="treino-icon">🏃</div>
+      <div class="treino-info">
+        <div class="treino-nome">Corrida – Parque</div>
+        <div class="treino-meta">Ontem · 🟡 Moderada · 5.2 km percorridos</div>
+      </div>
+      <div class="treino-badge badge-blue">Corrida</div>
+      <div class="treino-dur">45<small>min</small></div>
+    </div>
+    <div class="treino-item">
+      <div class="treino-icon">🏊</div>
+      <div class="treino-info">
+        <div class="treino-nome">Natação – Estilo livre</div>
+        <div class="treino-meta">20/02 · 🟢 Leve · Foco em técnica</div>
+      </div>
+      <div class="treino-badge badge-purple">Natação</div>
+      <div class="treino-dur">50<small>min</small></div>
+    </div>
+    <div class="treino-item">
+      <div class="treino-icon">🚴</div>
+      <div class="treino-info">
+        <div class="treino-nome">Ciclismo – Trilha</div>
+        <div class="treino-meta">18/02 · 🔴 Intensa · 22 km de trilha</div>
+      </div>
+      <div class="treino-badge badge-orange">Ciclismo</div>
+      <div class="treino-dur">90<small>min</small></div>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="page" id="page-dashboard">
+  <div class="page-header">
+    <h2>DASHBOARD</h2>
+    <p>Sua evolução em números</p>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-icon">🏅</div>
+      <div class="kpi-val">24</div>
+      <div class="kpi-name">Treinos no mês</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">⏱️</div>
+      <div class="kpi-val">18h</div>
+      <div class="kpi-name">Horas treinadas</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">🔥</div>
+      <div class="kpi-val">6</div>
+      <div class="kpi-name">Sequência atual (dias)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">📈</div>
+      <div class="kpi-val">83%</div>
+      <div class="kpi-name">Meta mensal</div>
+    </div>
+  </div>
+
+  <div class="charts-row">
+    <div class="chart-card">
+      <div class="chart-title">Treinos por dia da semana</div>
+      <div class="bar-chart">
+        <div class="bar-col">
+          <div class="bar" style="height:60%;background:#333"></div>
+          <div class="bar-day">Seg</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar highlight" style="height:100%"></div>
+          <div class="bar-day">Ter</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar" style="height:45%;background:#333"></div>
+          <div class="bar-day">Qua</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar highlight" style="height:85%"></div>
+          <div class="bar-day">Qui</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar" style="height:70%;background:#333"></div>
+          <div class="bar-day">Sex</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar" style="height:30%;background:#333"></div>
+          <div class="bar-day">Sáb</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar" style="height:10%;background:#2a2a2a"></div>
+          <div class="bar-day">Dom</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Esportes praticados</div>
+      <div class="donut-wrap">
+        <svg class="donut" width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#222" stroke-width="18"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#C8F53D" stroke-width="18"
+            stroke-dasharray="188 126" stroke-dashoffset="0"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#64A0FF" stroke-width="18"
+            stroke-dasharray="75 239" stroke-dashoffset="-188"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#B478FF" stroke-width="18"
+            stroke-dasharray="38 276" stroke-dashoffset="-263"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#FFA032" stroke-width="18"
+            stroke-dasharray="13 301" stroke-dashoffset="-301"/>
+        </svg>
+        <div class="donut-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#C8F53D"></div>Musculação<span class="legend-pct">60%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#64A0FF"></div>Corrida<span class="legend-pct">24%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#B478FF"></div>Natação<span class="legend-pct">12%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#FFA032"></div>Ciclismo<span class="legend-pct">4%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="metas-card">
+    <div class="chart-title">Metas Semanais</div>
+    <div class="meta-item">
+      <div class="meta-header"><span class="meta-name">🏋️ Musculação</span><span class="meta-pct">80%</span></div>
+      <div class="meta-bar"><div class="meta-fill" style="width:80%"></div></div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-header"><span class="meta-name">🏃 Corrida</span><span class="meta-pct">67%</span></div>
+      <div class="meta-bar"><div class="meta-fill" style="width:67%"></div></div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-header"><span class="meta-name">🏊 Natação</span><span class="meta-pct">50%</span></div>
+      <div class="meta-bar"><div class="meta-fill" style="width:50%"></div></div>
+    </div>
+    <div class="meta-item" style="margin-bottom:0">
+      <div class="meta-header"><span class="meta-name">🚴 Ciclismo</span><span class="meta-pct">100%</span></div>
+      <div class="meta-bar"><div class="meta-fill" style="width:100%"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PERFIL -->
+<div class="page" id="page-perfil">
+  <div class="perfil-top">
+    <div class="avatar">JS</div>
+    <div>
+      <div class="perfil-nome">João Silva</div>
+      <div class="perfil-sub">joao.silva@email.com · Membro desde Jan/2025</div>
+      <div class="perfil-badges">
+        <div class="perfil-badge">🏋️ Musculação</div>
+        <div class="perfil-badge">🏃 Corrida</div>
+        <div class="perfil-badge">🏊 Natação</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="perfil-stats">
+    <div class="pstat">
+      <div class="pstat-val">87</div>
+      <div class="pstat-label">Total de treinos</div>
+    </div>
+    <div class="pstat">
+      <div class="pstat-val">64h</div>
+      <div class="pstat-label">Horas treinadas</div>
+    </div>
+    <div class="pstat">
+      <div class="pstat-val">14</div>
+      <div class="pstat-label">Melhor sequência</div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✓ Treino salvo com sucesso!</div>
+
+<script>
+  // Set today's date
+  document.getElementById('data').valueAsDate = new Date();
+
+  function goTo(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    const tabs = ['home','treinos','dashboard','perfil'];
+    document.querySelectorAll('.nav-tab')[tabs.indexOf(page)].classList.add('active');
+  }
+
+  const emojis = { '🏋️ Musculação':'🏋️','🏃 Corrida':'🏃','🏊 Natação':'🏊','🚴 Ciclismo':'🚴','⚽ Futebol':'⚽','🥊 Boxe':'🥊' };
+  const badges = { '🏋️ Musculação':'badge-green','🏃 Corrida':'badge-blue','🏊 Natação':'badge-purple','🚴 Ciclismo':'badge-orange','⚽ Futebol':'badge-green','🥊 Boxe':'badge-orange' };
+
+  function addTreino() {
+    const tipo = document.getElementById('tipo').value;
+    const dur = document.getElementById('duracao').value || '?';
+    const data = document.getElementById('data').value;
+    const int = document.getElementById('intensidade').value;
+    const obs = document.getElementById('obs').value || 'Sem observações';
+
+    const dataFmt = data ? new Date(data + 'T12:00').toLocaleDateString('pt-BR', {day:'2-digit',month:'2-digit'}) : 'Hoje';
+
+    const item = document.createElement('div');
+    item.className = 'treino-item';
+    item.style.animation = 'fadeIn 0.3s ease';
+    item.innerHTML = `
+      <div class="treino-icon">${emojis[tipo] || '🏃'}</div>
+      <div class="treino-info">
+        <div class="treino-nome">${tipo.replace(/^\S+\s/,'')}</div>
+        <div class="treino-meta">${dataFmt} · ${int} · ${obs}</div>
+      </div>
+      <div class="treino-badge ${badges[tipo] || 'badge-green'}">${tipo.replace(/^\S+\s/,'')}</div>
+      <div class="treino-dur">${dur}<small>min</small></div>
+    `;
+
+    document.getElementById('treinos-list').prepend(item);
+    document.getElementById('duracao').value = '';
+    document.getElementById('obs').value = '';
+
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+</script>
+</body>
+</html>
