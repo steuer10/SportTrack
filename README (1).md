@@ -102,7 +102,7 @@ PORT=3333
 
 ---
 
-## 📊 Indicadores do Dashboard
+##  Indicadores do Dashboard
 
 - Total de treinos realizados no mês
 - Tempo total treinado (horas)
