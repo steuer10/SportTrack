@@ -1,10 +1,10 @@
-# 🏋️ SportTrack
+#  SportTrack
 
 > Plataforma web para gerenciamento e acompanhamento de treinos esportivos pessoais.
 
 ---
 
-## 📋 Descrição do Projeto
+##  Descrição do Projeto
 
 Atletas amadores não têm uma forma simples de registrar e acompanhar sua evolução nos treinos. Atualmente, utilizam cadernos, planilhas ou simplesmente não registram nada, perdendo histórico de desempenho e dificultando a evolução.
 
@@ -12,16 +12,16 @@ Atletas amadores não têm uma forma simples de registrar e acompanhar sua evolu
 
 ---
 
-## 🎯 Funcionalidades
+##  Funcionalidades
 
 ### Requisitos Funcionais (RF)
-- ✅ Cadastro e autenticação de usuário (login/registro)
-- ✅ Registro de treinos (data, tipo de esporte, duração, observações)
-- ✅ Listagem e histórico completo de treinos realizados
-- ✅ Dashboard com gráfico de evolução e estatísticas
-- ✅ Edição e exclusão de treinos
-- ✅ Categorização por tipo de esporte (musculação, corrida, natação, etc.)
-- ✅ Metas semanais de treino com acompanhamento de progresso
+-  Cadastro e autenticação de usuário (login/registro)
+-  Registro de treinos (data, tipo de esporte, duração, observações)
+-  Listagem e histórico completo de treinos realizados
+-  Dashboard com gráfico de evolução e estatísticas
+-  Edição e exclusão de treinos
+-  Categorização por tipo de esporte (musculação, corrida, natação, etc.)
+-  Metas semanais de treino com acompanhamento de progresso
 
 ### Requisitos Não Funcionais (RNF)
 - Interface responsiva e mobile-first
@@ -31,7 +31,7 @@ Atletas amadores não têm uma forma simples de registrar e acompanhar sua evolu
 
 ---
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 | Tecnologia | Função | Justificativa |
 |---|---|---|
@@ -45,7 +45,7 @@ Atletas amadores não têm uma forma simples de registrar e acompanhar sua evolu
 
 ---
 
-## 🗂️ Organização de Tarefas
+##  Organização de Tarefas
 
 | Semana | Foco |
 |---|---|
@@ -56,7 +56,7 @@ Atletas amadores não têm uma forma simples de registrar e acompanhar sua evolu
 
 ---
 
-## 🗃️ Modelagem de Dados (Resumo)
+##  Modelagem de Dados (Resumo)
 
 ```
 Usuario           Treino              Meta
@@ -72,7 +72,7 @@ criado_em         observacoes         ativa
 
 ---
 
-## 🚀 Como Executar
+##  Como Executar
 
 ### Pré-requisitos
 - Node.js 18+
@@ -112,13 +112,8 @@ PORT=3333
 
 ---
 
-## 👤 Autor
+## Autor
 
-Desenvolvido por **[Seu Nome]**  
+Desenvolvido por **[VINICIUS]**  
 Disciplina: Engenharia de Software  
 
----
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT.
