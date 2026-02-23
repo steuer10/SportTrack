@@ -115,5 +115,6 @@ PORT=3333
 ## Autor
 
 Desenvolvido por **[VINICIUS]**  
-Disciplina: Engenharia de Software  
+Disciplina: DEV WEB
+
 
