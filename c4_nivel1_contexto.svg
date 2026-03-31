@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1L9 5L1 9" fill="none" stroke="#185FA5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1L9 5L1 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#00000018"/>
+    </filter>
+    <!-- Person icon clip -->
+    <clipPath id="personClip">
+      <circle cx="110" cy="175" r="40"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="420" fill="#F4F6FA" rx="16"/>
+
+  <!-- Title -->
+  <text x="450" y="38" text-anchor="middle" font-size="16" font-weight="700" fill="#1A1A2E" letter-spacing="0.5">Diagrama de Contexto — Nível 1 (C4 Model)</text>
+  <text x="450" y="58" text-anchor="middle" font-size="11" fill="#888">SportTrack · Plataforma de Gerenciamento de Treinos</text>
+
+  <!-- === ATLETA (Person) === -->
+  <g filter="url(#shadow)">
+    <rect x="30" y="120" width="160" height="170" rx="14" fill="#FFFFFF" stroke="#0F6E56" stroke-width="1.5"/>
+  </g>
+  <!-- Person icon -->
+  <circle cx="110" cy="170" r="22" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/>
+  <text x="110" y="177" text-anchor="middle" font-size="22">🧑</text>
+  <text x="110" y="218" text-anchor="middle" font-size="14" font-weight="700" fill="#085041">Atleta</text>
+  <text x="110" y="236" text-anchor="middle" font-size="10" fill="#0F6E56">[Pessoa]</text>
+  <text x="110" y="256" text-anchor="middle" font-size="10" fill="#555">Usuário final da</text>
+  <text x="110" y="270" text-anchor="middle" font-size="10" fill="#555">plataforma</text>
+  <!-- Tag -->
+  <rect x="60" y="124" width="100" height="20" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+  <text x="110" y="138" text-anchor="middle" font-size="10" font-weight="600" fill="#0F6E56">Usuário</text>
+
+  <!-- Arrow: Atleta → SportTrack -->
+  <line x1="192" y1="205" x2="278" y2="205" stroke="#185FA5" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <rect x="194" y="190" width="84" height="18" rx="4" fill="#E6F1FB"/>
+  <text x="236" y="202" text-anchor="middle" font-size="9" fill="#185FA5">acessa via browser</text>
+
+  <!-- === SPORTTRACK (System) === -->
+  <g filter="url(#shadow)">
+    <rect x="278" y="80" width="244" height="250" rx="16" fill="#FFFFFF" stroke="#185FA5" stroke-width="2"/>
+  </g>
+  <!-- System badge -->
+  <rect x="322" y="84" width="156" height="22" rx="11" fill="#185FA5"/>
+  <text x="400" y="99" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF" letter-spacing="0.5">SISTEMA PRINCIPAL</text>
+  <!-- Logo area -->
+  <rect x="298" y="116" width="204" height="56" rx="10" fill="#EBF3FD"/>
+  <text x="400" y="147" text-anchor="middle" font-size="18" font-weight="800" fill="#0C447C" letter-spacing="1">SportTrack</text>
+  <text x="400" y="164" text-anchor="middle" font-size="10" fill="#378ADD">⚡ Plataforma de treinos</text>
+  <!-- Description -->
+  <text x="400" y="196" text-anchor="middle" font-size="11" fill="#333">Plataforma web para registro</text>
+  <text x="400" y="212" text-anchor="middle" font-size="11" fill="#333">e acompanhamento de treinos</text>
+  <text x="400" y="228" text-anchor="middle" font-size="11" fill="#333">esportivos com dashboard de</text>
+  <text x="400" y="244" text-anchor="middle" font-size="11" fill="#333">evolução e metas semanais.</text>
+  <!-- Tech stack -->
+  <rect x="298" y="262" width="204" height="56" rx="10" fill="#F4F6FA" stroke="#DDE3EF" stroke-width="1"/>
+  <text x="400" y="279" text-anchor="middle" font-size="9" fill="#888" font-weight="600">TECNOLOGIAS</text>
+  <text x="400" y="295" text-anchor="middle" font-size="10" fill="#555">React + Vite · Node.js + Express</text>
+  <text x="400" y="311" text-anchor="middle" font-size="10" fill="#555">PostgreSQL · Prisma ORM · JWT</text>
+
+  <!-- Arrow: SportTrack → Render/Railway -->
+  <line x1="523" y1="152" x2="610" y2="118" stroke="#888" stroke-width="1.3" marker-end="url(#arrowGray)" stroke-dasharray="6 3"/>
+  <rect x="534" y="118" width="72" height="18" rx="4" fill="#F1EFE8"/>
+  <text x="570" y="130" text-anchor="middle" font-size="9" fill="#666">hospeda / deploy</text>
+
+  <!-- Arrow: SportTrack → PostgreSQL -->
+  <line x1="523" y1="250" x2="610" y2="282" stroke="#888" stroke-width="1.3" marker-end="url(#arrowGray)" stroke-dasharray="6 3"/>
+  <rect x="536" y="264" width="68" height="18" rx="4" fill="#F1EFE8"/>
+  <text x="570" y="276" text-anchor="middle" font-size="9" fill="#666">persiste dados</text>
+
+  <!-- === RENDER/RAILWAY (External) === -->
+  <g filter="url(#shadow)">
+    <rect x="612" y="58" width="248" height="120" rx="14" fill="#FFFFFF" stroke="#5F5E5A" stroke-width="1.5" stroke-dasharray="6 3"/>
+  </g>
+  <rect x="660" y="62" width="152" height="22" rx="11" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+  <text x="736" y="77" text-anchor="middle" font-size="10" font-weight="600" fill="#5F5E5A">SISTEMA EXTERNO</text>
+  <text x="736" y="120" text-anchor="middle" font-size="22">☁️</text>
+  <text x="736" y="148" text-anchor="middle" font-size="14" font-weight="700" fill="#444">Render / Railway</text>
+  <text x="736" y="165" text-anchor="middle" font-size="10" fill="#777">Plataforma de deploy em nuvem</text>
+
+  <!-- === POSTGRESQL CLOUD (External) === -->
+  <g filter="url(#shadow)">
+    <rect x="612" y="230" width="248" height="120" rx="14" fill="#FFFFFF" stroke="#5F5E5A" stroke-width="1.5" stroke-dasharray="6 3"/>
+  </g>
+  <rect x="660" y="234" width="152" height="22" rx="11" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+  <text x="736" y="249" text-anchor="middle" font-size="10" font-weight="600" fill="#5F5E5A">SISTEMA EXTERNO</text>
+  <text x="736" y="292" text-anchor="middle" font-size="22">🐘</text>
+  <text x="736" y="320" text-anchor="middle" font-size="14" font-weight="700" fill="#444">PostgreSQL Cloud</text>
+  <text x="736" y="337" text-anchor="middle" font-size="10" fill="#777">Banco de dados gerenciado</text>
+
+  <!-- === LEGEND === -->
+  <rect x="30" y="310" width="230" height="96" rx="12" fill="#FFFFFF" stroke="#DDE3EF" stroke-width="1"/>
+  <text x="145" y="330" text-anchor="middle" font-size="11" font-weight="700" fill="#333">Legenda</text>
+  <!-- Pessoa -->
+  <rect x="46" y="340" width="14" height="14" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/>
+  <text x="67" y="352" font-size="10" fill="#333">Pessoa / Ator</text>
+  <!-- Sistema -->
+  <rect x="46" y="362" width="14" height="14" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+  <text x="67" y="374" font-size="10" fill="#333">Sistema principal (SportTrack)</text>
+  <!-- Externo -->
+  <rect x="46" y="384" width="14" height="14" rx="3" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.5" stroke-dasharray="4 2"/>
+  <text x="67" y="396" font-size="10" fill="#333">Sistema externo (suporte)</text>
+</svg>
