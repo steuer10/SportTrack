@@ -1,0 +1,23 @@
+@startuml SportTrack_Context
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama de Contexto - Nivel 1 (C4 Model) - SportTrack
+
+Person(atleta, "Atleta", "Usuario final da plataforma.")
+
+System(sporttrack, "SportTrack", "Plataforma web para registro e acompanhamento de treinos. React + Vite, Node.js + Express, PostgreSQL, Prisma ORM, JWT")
+
+System_Ext(render, "Render / Railway", "Plataforma de deploy em nuvem.")
+
+System_Ext(postgres_cloud, "PostgreSQL Cloud", "Banco de dados relacional gerenciado em nuvem.")
+
+Rel(atleta, sporttrack, "Acessa via browser", "HTTPS")
+
+Rel(sporttrack, render, "Hospedado e deploy", "CI/CD")
+
+Rel(sporttrack, postgres_cloud, "Persiste e consulta dados", "TCP 5432")
+
+@enduml

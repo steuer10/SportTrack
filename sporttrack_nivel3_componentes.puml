@@ -1,0 +1,51 @@
+@startuml SportTrack_Components
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama de Componentes - Nivel 3 (C4 Model) - SportTrack Frontend
+
+Person(atleta, "Atleta", "Usuario final da plataforma.")
+
+Container_Boundary(frontend, "Frontend - React 18 + Vite - Porta 5173") {
+
+    Component(main, "main.jsx", "React Entry Point", "Ponto de entrada da aplicacao.")
+
+    Component(app, "App.jsx", "React Component", "Componente raiz. Define roteamento de paginas.")
+
+    Component(auth_ctx, "AuthContext", "React Context API", "Gerencia estado de autenticacao. Expoe user, token, login, logout, register.")
+
+    Component(api_js, "api.js", "Servico HTTP", "Centraliza chamadas ao backend. Anexa JWT nos headers automaticamente.")
+
+    Component(navbar, "Navbar.jsx", "React Component", "Barra de navegacao global. Controla rotas protegidas e logout.")
+
+    Component(auth_page, "AuthPage", "React Page", "Tela de login e cadastro. Validacao de formularios.")
+
+    Component(dashboard_page, "DashboardPage", "React Page", "Estatisticas e grafico Canvas. Frequencia semanal de treinos.")
+
+    Component(workouts_page, "WorkoutsPage", "React Page", "CRUD de treinos. Modal para criar e editar.")
+
+    Component(goals_page, "GoalsPage", "React Page", "Gestao de metas semanais. Barra de progresso.")
+
+}
+
+Container_Ext(backend, "Backend API", "Node.js + Express - Porta 3333", "API REST da aplicacao.")
+
+Rel(main, app, "Renderiza")
+Rel(main, auth_ctx, "Prove contexto de autenticacao")
+
+Rel(app, navbar, "Renderiza em todas as rotas")
+Rel(app, auth_page, "Roteia para /login e /register")
+Rel(app, dashboard_page, "Roteia para /dashboard")
+Rel(app, workouts_page, "Roteia para /treinos")
+Rel(app, goals_page, "Roteia para /metas")
+
+Rel(auth_page, api_js, "Chama authService", "HTTP")
+Rel(dashboard_page, api_js, "Chama treinoService", "HTTP")
+Rel(workouts_page, api_js, "Chama treinoService CRUD", "HTTP")
+Rel(goals_page, api_js, "Chama metaService", "HTTP")
+
+Rel(api_js, backend, "Requisicoes REST com JWT", "HTTPS / JSON")
+
+@enduml

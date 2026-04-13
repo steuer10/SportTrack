@@ -1,0 +1,29 @@
+@startuml SportTrack_Containers
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama de Conteineres - Nivel 2 (C4 Model) - SportTrack
+
+Person(atleta, "Atleta", "Usuario final da plataforma.")
+
+System_Boundary(sporttrack, "SportTrack") {
+
+    Container(frontend, "Frontend", "React 18 + Vite", "Interface web da aplicacao. Porta 5173")
+
+    Container(backend, "Backend API", "Node.js + Express", "API REST da aplicacao. Autenticacao JWT e bcrypt. Porta 3333")
+
+    ContainerDb(db, "Banco de Dados", "PostgreSQL", "Armazenamento relacional. Acesso via Prisma ORM. Porta 5432")
+
+}
+
+Rel(atleta, frontend, "Acessa e interage", "HTTPS")
+
+Rel(frontend, backend, "Envia requisicoes", "REST / JSON + JWT")
+
+Rel_Back(frontend, backend, "Retorna respostas", "REST / JSON")
+
+Rel(backend, db, "Le e escreve dados", "Prisma ORM / SQL")
+
+@enduml
