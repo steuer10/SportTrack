@@ -1,4 +1,4 @@
-# 🚀 SportTrack
+# SportTrack
 
 > Plataforma web para gerenciamento e acompanhamento de treinos esportivos pessoais.
 
@@ -10,7 +10,7 @@
 
 ---
 
-## 📌 Sobre o Projeto
+##  Sobre o Projeto
 
 Atletas amadores frequentemente não possuem uma forma eficiente de registrar e acompanhar sua evolução nos treinos. Muitos utilizam métodos manuais, como cadernos ou planilhas, ou simplesmente não registram suas atividades.
 
@@ -26,7 +26,7 @@ Facilitar o acompanhamento de desempenho esportivo, oferecendo uma plataforma ce
 
 ## ⚙️ Funcionalidades
 
-### ✅ Principais Recursos
+###  Principais Recursos
 - Cadastro e login de usuários
 - Registro de treinos (data, tipo, duração e observações)
 - Histórico completo de atividades
@@ -36,7 +36,7 @@ Facilitar o acompanhamento de desempenho esportivo, oferecendo uma plataforma ce
 
 ---
 
-## 🧠 Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 | Tecnologia | Função |
 |---|---|
@@ -50,7 +50,7 @@ Facilitar o acompanhamento de desempenho esportivo, oferecendo uma plataforma ce
 
 ---
 
-## 🏗️ Arquitetura do Projeto
+##  Arquitetura do Projeto
 
 sporttrack/
 │
@@ -67,7 +67,7 @@ sporttrack/
 
 ---
 
-## 🗄️ Modelagem de Dados
+## Modelagem de Dados
 
 Usuario           Treino              Meta
 --------          --------            --------
@@ -81,15 +81,14 @@ criado_em         observacoes         ativa
 
 ---
 
-## ▶️ Como Executar o Projeto
-
+## Como Executar o Projeto
 ### 🔧 Pré-requisitos
 - Node.js 18+
 - PostgreSQL
 
 ---
 
-### 🔙 Backend
+###  Backend
 
 cd backend  
 npm install  
@@ -98,7 +97,7 @@ npm run dev
 
 ---
 
-### 🔜 Frontend
+###  Frontend
 
 cd frontend  
 npm install  
@@ -106,7 +105,7 @@ npm run dev
 
 ---
 
-### 🔐 Variáveis de Ambiente
+### Variáveis de Ambiente
 
 DATABASE_URL="postgresql://usuario:senha@localhost:5432/sporttrack"  
 JWT_SECRET="sua_chave_secreta"  
@@ -114,7 +113,7 @@ PORT=3333
 
 ---
 
-## 📊 Indicadores do Dashboard
+## Indicadores do Dashboard
 
 - Total de treinos no mês
 - Tempo total treinado
@@ -124,7 +123,7 @@ PORT=3333
 
 ---
 
-## 📈 Melhorias Futuras
+##  Melhorias Futuras
 
 - Aplicativo mobile
 - Integração com smartwatches
@@ -133,11 +132,11 @@ PORT=3333
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
 Vinicius Steuernagel  
-Curso: Desenvolvimento Web  
-Instituição: Univille  
+Curso: 
+Instituição:CATOLICA
 
 ---
 
